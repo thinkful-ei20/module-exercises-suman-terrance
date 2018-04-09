@@ -1,9 +1,6 @@
-'use strict';/* global shoppingList, cuid */
-
+'use strict';
+/* global shoppingList */
 // eslint-disable-next-line no-unused-vars
-const store = { 
-};
-
 $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
