@@ -1,4 +1,4 @@
-/* global shoppingList, cuid */
+'use strict';/* global shoppingList, cuid */
 
 // eslint-disable-next-line no-unused-vars
 const store = {
@@ -9,7 +9,7 @@ const store = {
     { id: cuid(), name: 'bread', checked: false }
   ],
   hideCheckedItems: false,
-  searchTerm: ''
+  searchTerm: '',  
 };
 
 $(document).ready(function() {
