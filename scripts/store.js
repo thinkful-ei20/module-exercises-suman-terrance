@@ -11,6 +11,7 @@ const store = (function(){
   const hideCheckedItems = false;	
   const searchTerm = ''; 
   const findById = function(id){
+    console.log(id);
     let found = store.items.find(item => {
       if(item.id === id){
         return item;
@@ -20,8 +21,7 @@ const store = (function(){
     return found;    
   };
   const addItem = function(name){
-    try{
-      console.log('got here');
+    try{      
       Item.validateName(name);      
       this.items.push(Item.create(name));
     }catch(error){
@@ -29,24 +29,35 @@ const store = (function(){
     }
   };
   const findAndToggleChecked = function(id){
-    this.items.findById(id).checked = !this.items.findById(id).checked;
+    findById(id).checked = !findById(id).checked;
   };
   const findAndUpdateName = function(id,newName){
     try{
-      Item.validateName(newName);
-      this.items.findById(id).name = newName;
+      Item.validateName(newName);      
+      findById(id).name = newName;
     }catch(error){
       console.log(`Cannot update name: ${error.message}`);
     }
   };
   const findAndDelete = function(id){
     function findFirstIndex(element){
+      console.log(element.id);
       return element.id === id;
     }
-    let index = this.items.findIndex(findFirstIndex);    
+    let index = this.items.findIndex(findFirstIndex);
+    console.log(index);   
     this.items.splice(index,1);
     //return this.items;
   };
+
+  const toggleCheckedFilter = function(){
+    this.hideCheckedItems = !this.hideCheckedItems;
+  };
+
+  const setSearchTerm = function(val){
+    this.searchTerm = val;    
+  };
+
 
   return {
     items,
@@ -57,5 +68,7 @@ const store = (function(){
     findAndToggleChecked,
     findAndUpdateName,
     findAndDelete,
+    toggleCheckedFilter,
+    setSearchTerm,
   };
 }());
